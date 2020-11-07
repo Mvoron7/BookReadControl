@@ -1,0 +1,15 @@
+﻿.main-body {
+    background-color: beige;
+}
+
+.book-icon {
+    display: block;
+    height: 20px;
+    width: 20px;
+    color: mediumpurple;
+}
+
+.content {
+    top: 56px; 
+    position: absolute;
+}
