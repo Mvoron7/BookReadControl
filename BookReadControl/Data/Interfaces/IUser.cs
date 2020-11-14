@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BookReadControl.Data.Interfaces
 {
-    public interface IBooksTypes
+    public interface IUser
     {
-        IEnumerable<BookType> BookTypes { get; }
+        User GetUser(int id);
 
-        BookType GetBookType(int id);
+        User GetUser(IServiceProvider provider);
     }
 }

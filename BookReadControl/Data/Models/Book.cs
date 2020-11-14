@@ -20,7 +20,7 @@ namespace BookReadControl.Data.Models
         public string NatureName { get; set; }
 
         /// <summary>url image</summary>
-        public string Title { get; set; }
+        public string TitleImg { get; set; }
 
         /// <summary>International Standard Book Number, по сути еще одни ID</summary>
         public string ISBN { get; set; }

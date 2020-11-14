@@ -33,5 +33,10 @@ namespace BookReadControl.Data.mocks
                 }
             };
         }
+
+        public BookType GetBookType(int id)
+        {
+            return BookTypes.Where(bt => bt.Id == id).FirstOrDefault();
+        }
     }
 }

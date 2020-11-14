@@ -1,0 +1,11 @@
+﻿<h2>Книги</h2>
+<div class="row mt-5 mb-2">
+    @{
+        foreach (Book book in Model)
+        {
+            // Чтобы не создавать новый шаблон возьмем старый.
+            await Html.RenderPartialAsync("BookCard", book);
+        }
+    }
+</div>
+

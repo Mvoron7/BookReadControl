@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BookReadControl.Data;
 using BookReadControl.Data.Interfaces;
 using BookReadControl.Data.mocks;
+using BookReadControl.Data.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -35,7 +36,14 @@ namespace BookReadControl
 
             services.AddTransient<IBooks, MockBooks>();
             services.AddTransient<IBooksTypes, MockType>();
+            services.AddTransient<IUser, MockUser>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sp => LibraryToRead.GetLibrary(sp));
+
             services.AddMvc(options => options.EnableEndpointRouting = false);
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +52,7 @@ namespace BookReadControl
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseMvcWithDefaultRoute();
         }
     }

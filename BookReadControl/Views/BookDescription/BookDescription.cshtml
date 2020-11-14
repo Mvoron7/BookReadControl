@@ -1,0 +1,5 @@
+﻿<h2>@Model.Name</h2>
+@{
+    // Чтобы не создавать новый шаблон возьмем старый.
+    await Html.RenderPartialAsync("BookCard", (Book)Model);
+}

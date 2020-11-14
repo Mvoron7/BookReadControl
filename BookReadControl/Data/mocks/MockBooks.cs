@@ -19,7 +19,7 @@ namespace BookReadControl.Data.mocks
                     Id = 1,
                     Name = "Микроконтроллеры AVR семейства Classic фирмы ATMEL",
                     NatureName = "Микроконтроллеры AVR семейства Classic фирмы ATMEL",
-                    Title = "/img/3PYN-SfKfqs.jpg",
+                    TitleImg = "/img/3PYN-SfKfqs.jpg",
                     ISBN = "9785-97060-260-7",
                     Year = 2018,
                     PageCount = 100,
@@ -32,7 +32,7 @@ namespace BookReadControl.Data.mocks
                     Id = 2,
                     Name = "Чистый код. Создание, анализ и рефакторинг",
                     NatureName = "Clean Code. Handbook of Agile Software Craftsmanship",
-                    Title = "/img/3PYN-SfKfqs.jpg",
+                    TitleImg = "/img/3PYN-SfKfqs.jpg",
                     ISBN = "978-5-4461-0960-9",
                     Year = 2021,
                     PageCount = 457,
@@ -45,7 +45,7 @@ namespace BookReadControl.Data.mocks
                     Id = 3,
                     Name = " Интерфейс. Основы проектирования взаимодействия",
                     NatureName = "Подробнее: https://www.labirint.ru/books/642466/",
-                    Title = "/img/3PYN-SfKfqs.jpg",
+                    TitleImg = "/img/3PYN-SfKfqs.jpg",
                     ISBN = "978-5-4461-0877-0",
                     Year = 2020,
                     PageCount = 719,
@@ -58,7 +58,7 @@ namespace BookReadControl.Data.mocks
                     Id = 4,
                     Name = "Совершенный код: Практическое руководство по разработке программного обеспечения",
                     NatureName = "Code complete",
-                    Title = "/img/3PYN-SfKfqs.jpg",
+                    TitleImg = "/img/3PYN-SfKfqs.jpg",
                     ISBN = "978-5-9909805-1-8",
                     Year = 2020,
                     PageCount = 841,
@@ -71,7 +71,7 @@ namespace BookReadControl.Data.mocks
                     Id = 5,
                     Name = "Реактивное программирование с применением RxJava",
                     NatureName = "",
-                    Title = "/img/3PYN-SfKfqs.jpg",
+                    TitleImg = "/img/3PYN-SfKfqs.jpg",
                     ISBN = "978-5-97060-496-0",
                     Year = 2017,
                     PageCount = 351,
@@ -84,7 +84,7 @@ namespace BookReadControl.Data.mocks
                     Id = 6,
                     Name = "WPF windows presentation Foundation в .Net 4.5 с примерами на C# 5.0 для профессионалов",
                     NatureName = "",
-                    Title = "/img/3PYN-SfKfqs.jpg",
+                    TitleImg = "/img/3PYN-SfKfqs.jpg",
                     ISBN = "978-5-8459-1854-3",
                     Year = 2017,
                     PageCount = 1014,
@@ -97,7 +97,7 @@ namespace BookReadControl.Data.mocks
                     Id = 7,
                     Name = "Linux Карманный справочник",
                     NatureName = "Linux phrasebook",
-                    Title = "/img/3PYN-SfKfqs.jpg",
+                    TitleImg = "/img/3PYN-SfKfqs.jpg",
                     ISBN = "978-5-8459-1956-4",
                     Year = 2015,
                     PageCount = 407,
@@ -110,7 +110,7 @@ namespace BookReadControl.Data.mocks
 
         public Book GetBook(int id)
         {
-            throw new NotImplementedException();
+            return Books.Where(b => b.Id == id).FirstOrDefault();
         }
     }
 }
