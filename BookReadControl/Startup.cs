@@ -36,10 +36,9 @@ namespace BookReadControl
 
             services.AddTransient<IBooks, MockBooks>();
             services.AddTransient<IBooksTypes, MockType>();
-            services.AddTransient<IUser, MockUser>();
-
+            services.AddSingleton<IUser, MockUser>();
+            services.AddSingleton<ILibrary, MockLibrary>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped(sp => LibraryToRead.GetLibrary(sp));
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddMemoryCache();

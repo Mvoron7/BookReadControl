@@ -14,11 +14,19 @@ namespace BookReadControl.Controllers
     {
         private User _user;
         private LibraryToRead _library;
+        private IServiceProvider _provider;
+        private IBooks _books;
 
-        public UserLibraryController(IServiceProvider provider, IUser users, IBooks books)
+        public UserLibraryController(IServiceProvider provider, IUser users, IBooks books, ILibrary library)
         {
+            ISession session = provider.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+            string libraryId = session.GetString("LibraryId") ?? Guid.NewGuid().ToString();
+            session.SetString("LibraryId", libraryId);
+
+            _provider = provider;
+            _books = books;
             _user = users.GetUser(provider);
-            _library = LibraryToRead.GetLibrary(provider);
+            _library = library.GetLibrary(libraryId);
         }
 
         public ViewResult BooksList()
@@ -28,10 +36,9 @@ namespace BookReadControl.Controllers
             return View(books);
         }
 
-        public RedirectToActionResult addToLibrary(int id, IServiceProvider provider, IBooks books)
+        public RedirectToActionResult addToLibrary(int id)
         {
-            LibraryToRead library = LibraryToRead.GetLibrary(provider);
-            library.AddBook(books.GetBook(id));
+            _library.AddBook(_books.GetBook(id));
 
             return RedirectToAction("BooksList");
         }

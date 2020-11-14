@@ -11,6 +11,8 @@ namespace BookReadControl.Data.Models
 {
     public class LibraryToRead
     {
+    private static List<LibraryToRead> libraries = new List<LibraryToRead>();
+
         public List<Book> Books
         {
             get
@@ -28,20 +30,6 @@ namespace BookReadControl.Data.Models
         public string Id;
 
         private List<Book> _books;
-
-        public static LibraryToRead GetLibrary(IServiceProvider provider)
-        {
-            ISession session = provider.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
-
-            string libraryId = session.GetString("LibraryId") ?? Guid.NewGuid().ToString();
-
-            session.SetString("LibraryId", libraryId);
-
-            return new LibraryToRead()
-            {
-                Id = libraryId,
-            };
-        }
 
         public void AddBook(Book book)
         {
