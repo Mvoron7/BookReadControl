@@ -38,7 +38,7 @@ namespace BookReadControl.Data.mocks
                     PageCount = 457,
                     ReadingPages = 457,
                     Readed = DateTime.Parse("25, 10, 2020"),
-                    BookTypeId = 1,
+                    BookTypeId = 2,
                 },
                 new Book()
                 {
@@ -51,7 +51,7 @@ namespace BookReadControl.Data.mocks
                     PageCount = 719,
                     ReadingPages = 279,
                     Readed = DateTime.Parse("01, 10, 2020"),
-                    BookTypeId = 1,
+                    BookTypeId = 3,
                 },
                 new Book()
                 {
@@ -77,7 +77,7 @@ namespace BookReadControl.Data.mocks
                     PageCount = 351,
                     ReadingPages = 0,
                     Readed = DateTime.Parse("01, 01, 1900"),
-                    BookTypeId = 1,
+                    BookTypeId = 2,
                 },
                 new Book()
                 {
@@ -90,7 +90,7 @@ namespace BookReadControl.Data.mocks
                     PageCount = 1014,
                     ReadingPages = 1014,
                     Readed = DateTime.Parse("01, 03, 2020"),
-                    BookTypeId = 1,
+                    BookTypeId = 3,
                 },
                 new Book()
                 {

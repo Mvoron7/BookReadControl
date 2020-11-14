@@ -22,13 +22,13 @@ namespace BookReadControl.Data.mocks
                 new BookType()
                 {
                     Id = 2,
-                    Name = "Справочник по языку",
+                    Name = "Пособие",
                     Description = "Справочник по языку",
                 },
                 new BookType()
                 {
                     Id = 3,
-                    Name = "Рекомендации ко стилю кодирования",
+                    Name = "Рекомендации",
                     Description = "Рекомендации ко стилю кодирования",
                 }
             };

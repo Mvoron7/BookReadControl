@@ -54,6 +54,10 @@ namespace BookReadControl
             app.UseStaticFiles();
             app.UseSession();
             app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(name: "TypeFilter", template: "Books/{action}/{typeName?}", defaults: new { Controller = "Books", action = "BooksList" });
+            });
         }
     }
 

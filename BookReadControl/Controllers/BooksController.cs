@@ -22,11 +22,22 @@ namespace BookReadControl.Controllers
             _user = users.GetCurentUser(provider);
         }
 
-        public ViewResult BookList()
+        [Route("Books/BooksList")]
+        [Route("Books/BooksList/{typeName}")]
+        public ViewResult BooksList(string typeName)
         {
+            BookType type = _types.BookTypes.Where(t => t.Name.ToUpper().Equals(typeName?.ToUpper())).FirstOrDefault();
+
             ViewBag.User = _user;
             ViewBag.Title = "Литература";
             var books = _books.Books;
+
+            if (type != null)
+            {
+                ViewBag.Title = type.Name;
+                books = _books.Books.Where(b => b.BookTypeId == type.Id).ToList();
+            }
+
             return View(books);
         }
     }

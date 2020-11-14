@@ -28,7 +28,7 @@ namespace BookReadControl.Controllers
             _session.Clear();
             _session.SetInt32(Constants.UserId, userId);
 
-            return RedirectToAction("bookList", "Books");
+            return RedirectToAction("booksList", "Books");
         }
 
         public RedirectToActionResult LogOut()
