@@ -12,10 +12,9 @@ namespace BookReadControl.Controllers
 {
     public class UserLibraryController : Controller
     {
-        private User _user;
-        private LibraryToRead _library;
-        private IServiceProvider _provider;
-        private IBooks _books;
+        private readonly User _user;
+        private readonly LibraryToRead _library;
+        private readonly IBooks _books;
 
         public UserLibraryController(IServiceProvider provider, IUser users, IBooks books, ILibrary library)
         {
@@ -23,20 +22,20 @@ namespace BookReadControl.Controllers
             string libraryId = session.GetString("LibraryId") ?? Guid.NewGuid().ToString();
             session.SetString("LibraryId", libraryId);
 
-            _provider = provider;
             _books = books;
-            _user = users.GetUser(provider);
+            _user = users.GetCurentUser(provider);
             _library = library.GetLibrary(libraryId);
         }
 
         public ViewResult BooksList()
         {
+            ViewBag.User = _user;
             ViewBag.Title = _user.Name;
             var books = _library.Books;
             return View(books);
         }
 
-        public RedirectToActionResult addToLibrary(int id)
+        public RedirectToActionResult AddToLibrary(int id)
         {
             _library.AddBook(_books.GetBook(id));
 

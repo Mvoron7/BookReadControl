@@ -1,5 +1,5 @@
 ﻿@model User
-<img class="bd-placeholder-img" style="max-width: 50px; height: 50px; padding-right:15px;" src="~/img/1455321158194326515.jpg" />
+<img class="bd-placeholder-img" style="max-width: 50px; height: 50px; padding-right:15px;" src="@Model.Avatar" />
 <p style="color: green; padding-right: 15px;">@Model.Name</p>
 @{
     if (Model.IsAdmin)
@@ -7,4 +7,6 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Набор доп опций</button>
     }
 }
-<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Out</button>
+<a href="/Home/logOut">
+    <button class="btn btn-outline-success my-2 my-sm-0">Out</button>
+</a>

@@ -12,13 +12,15 @@ namespace BookReadControl.Controllers
 {
     public class BookDescriptionController : Controller
     {
-        private IBooks _books;
-        private IBooksTypes _booksTypes;
+        private readonly IBooks _books;
+        private readonly IBooksTypes _booksTypes;
+        private readonly User _user;
 
-        public BookDescriptionController(IBooks books, IBooksTypes types)
+        public BookDescriptionController(IServiceProvider provider, IUser user, IBooks books, IBooksTypes types)
         {
             _books = books;
             _booksTypes = types;
+            _user = user.GetCurentUser(provider);
         }
 
         public ViewResult BookDescription(int id)
@@ -26,6 +28,7 @@ namespace BookReadControl.Controllers
             Book book = _books.GetBook(id);
             BookType type = _booksTypes.GetBookType(book.BookTypeId);
 
+            ViewBag.User = _user;
             ViewBag.Title = type.Name;
             return View(book);
         }

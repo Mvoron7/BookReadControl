@@ -23,13 +23,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/UserLibrary/BooksList/">Выбранное</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="" tabindex="-1" aria-disabled="true">#</a>
-                    </li>
                 </ul>
                @if (ViewBag.User != null) {
                     <div class="form-inline mt-2 mt-md-0">
-                        @Html.Partial("UserCard", (User)ViewBag.User);
+                        @await Html.PartialAsync("UserCard", (User)ViewBag.User);
                     </div>
                 }
             </div>

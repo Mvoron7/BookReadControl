@@ -15,11 +15,14 @@ namespace BookReadControl.Data.Models
 
         public bool IsAdmin { get => Admin; }
 
-        public User(int userId, string name, bool admin)
+        public string Avatar { get; }
+
+        public User(int userId, string name, bool admin, string avatar)
         {
             Id = userId;
             Name = name;
             Admin = admin;
+            Avatar = avatar;
         }
     }
 }

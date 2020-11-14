@@ -11,14 +11,10 @@ namespace BookReadControl.Controllers
 {
     public class HomeController : Controller
     {
-        private IServiceProvider _provider;
-        private IUser _users;
-        private ISession _session;
+        private readonly ISession _session;
 
-        public HomeController(IUser users, IServiceProvider provider)
+        public HomeController(IServiceProvider provider)
         {
-            _provider = provider;
-            _users = users;
             _session = provider.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
         }
 
@@ -27,14 +23,19 @@ namespace BookReadControl.Controllers
             return View();
         }
 
-        public RedirectToActionResult SetUser(int userId)
+        public RedirectToActionResult LogIn(int userId)
         {
             _session.Clear();
-            _users.GetUser(userId);
-            ISession session = _provider.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
-            session.SetInt32("UserId", userId);
+            _session.SetInt32(Constants.UserId, userId);
 
             return RedirectToAction("bookList", "Books");
+        }
+
+        public RedirectToActionResult LogOut()
+        {
+            _session.Clear();
+
+            return RedirectToAction("Index");
         }
     }
 }

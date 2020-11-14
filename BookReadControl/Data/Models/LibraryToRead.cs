@@ -11,8 +11,6 @@ namespace BookReadControl.Data.Models
 {
     public class LibraryToRead
     {
-    private static List<LibraryToRead> libraries = new List<LibraryToRead>();
-
         public List<Book> Books
         {
             get
@@ -27,7 +25,7 @@ namespace BookReadControl.Data.Models
             }
         }
 
-        public string Id;
+        public readonly string Id;
 
         private List<Book> _books;
 

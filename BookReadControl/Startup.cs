@@ -9,6 +9,7 @@ using BookReadControl.Data.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,7 +18,7 @@ namespace BookReadControl
     public class Startup
     {
 
-        private IConfigurationRoot _dbConfiguration;
+        private readonly IConfigurationRoot _dbConfiguration;
 
         public Startup(IWebHostEnvironment host)
         {
@@ -31,7 +32,7 @@ namespace BookReadControl
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            //Пример подключения БД
+            //Пример подключения БД. Неиспользуется
             //services.AddDbContext<AppDBContent>(options => options.UseSqlServer(_dbConfiguration.GetConnectionString("DefaultConnection")));
 
             services.AddTransient<IBooks, MockBooks>();

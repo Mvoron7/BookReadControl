@@ -10,6 +10,6 @@ namespace BookReadControl.Data.Interfaces
     {
         User GetUser(int id);
 
-        User GetUser(IServiceProvider provider);
+        User GetCurentUser(IServiceProvider provider);
     }
 }

@@ -16,9 +16,9 @@ namespace BookReadControl.Data.mocks
         {
             get => new List<User>()
             {
-                new User(0, "NewUser", false),
-                new User(1, "Admin", true),
-                new User(2, "User", false),
+                new User(0, "NewUser", false, "/img/1439970506_901940678.jpg"),
+                new User(1, "Admin", true, "/img/1440434403_197979955.jpg"),
+                new User(2, "User", false, "/img/1455321158194326515.jpg"),
             };
         }
 
@@ -27,12 +27,12 @@ namespace BookReadControl.Data.mocks
             return Users.Where(u => u.Id == id).FirstOrDefault();
         }
 
-        public User GetUser(IServiceProvider provider)
+        public User GetCurentUser(IServiceProvider provider)
         {
             ISession session = provider.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
 
             //Если пользователь не зарегистрирован "создаем нового"
-            int userId = session.GetInt32("UserID") ?? 0;
+            int userId = session.GetInt32(Constants.UserId) ?? 0;
             return GetUser(userId);
         }
     }

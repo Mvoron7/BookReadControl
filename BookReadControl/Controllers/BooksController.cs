@@ -15,14 +15,16 @@ namespace BookReadControl.Controllers
         private readonly IBooksTypes _types;
         private readonly User _user;
 
-        public BooksController(IBooks books, IBooksTypes types)
+        public BooksController(IServiceProvider provider, IBooks books, IBooksTypes types, IUser users)
         {
             _books = books;
             _types = types;
+            _user = users.GetCurentUser(provider);
         }
 
         public ViewResult BookList()
         {
+            ViewBag.User = _user;
             ViewBag.Title = "Литература";
             var books = _books.Books;
             return View(books);
