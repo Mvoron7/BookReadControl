@@ -18,6 +18,13 @@ namespace BookReadControl.Data.mocks
             _libraries = new Dictionary<string, LibraryToRead>();
         }
 
+        public void AddBook(string id, Book book)
+        {
+            if (!_libraries.ContainsKey(id))
+                _libraries.Add(id, new LibraryToRead());
+            _libraries[id].AddBook(book);
+        }
+
         public LibraryToRead GetLibrary(string id)
         {
             if (!_libraries.ContainsKey(id))

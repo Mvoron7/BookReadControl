@@ -31,7 +31,7 @@ namespace BookReadControl.Data.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Guid { get; set; }
 
-        private List<Book> _books;
+        private List<Book> _books { get; set; }
 
         public void AddBook(Book book)
         {

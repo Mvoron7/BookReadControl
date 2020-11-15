@@ -34,11 +34,11 @@ namespace BookReadControl
             //services.AddTransient<IBooks, MockBooks>();
             //services.AddTransient<IBooksTypes, MockType>();
             //services.AddSingleton<IUser, MockUser>();
-            //services.AddSingleton<ILibrary, MockLibrary>();
+            services.AddSingleton<ILibrary, MockLibrary>();
             services.AddTransient<IBooks, BookRepository>();
             services.AddTransient<IBooksTypes, TypeRepository>();
             services.AddTransient<IUser, UserRepository>();
-            services.AddTransient<ILibrary, LibraryRepository>();
+            //services.AddSingleton<ILibrary, LibraryRepository>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -59,7 +59,7 @@ namespace BookReadControl
                 routes.MapRoute(name: "TypeFilter", template: "Books/{action}/{typeName?}", defaults: new { Controller = "Books", action = "BooksList" });
             });
 
-            using (var scope = app.ApplicationServices.CreateScope())
+            using (IServiceScope scope = app.ApplicationServices.CreateScope())
             {
                 UpdateDataBase.Update(scope.ServiceProvider.GetRequiredService<AppDBContent>());
             }

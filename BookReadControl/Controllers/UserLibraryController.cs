@@ -12,32 +12,43 @@ namespace BookReadControl.Controllers
 {
     public class UserLibraryController : Controller
     {
-        private readonly User _user;
-        private readonly LibraryToRead _library;
+        private readonly IUser _users;
+        private readonly IServiceProvider _provider;
         private readonly IBooks _books;
+        private readonly ILibrary _library;
 
-        public UserLibraryController(IServiceProvider provider, IUser users, IBooks books, ILibrary library)
+        public UserLibraryController(IServiceProvider provider, IBooks books, ILibrary library, IUser users)
         {
-            ISession session = provider.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
-            string libraryId = session.GetString("LibraryId") ?? Guid.NewGuid().ToString();
-            session.SetString("LibraryId", libraryId);
-
             _books = books;
-            _user = users.GetCurentUser(provider);
-            _library = library.GetLibrary(libraryId);
+            _library = library;
+            _provider = provider;
+            _users = users;
         }
 
         public ViewResult BooksList()
         {
-            ViewBag.User = _user;
-            ViewBag.Title = _user.Name;
-            var books = _library.Books;
+            ISession session = _provider.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+
+            string libraryId = session.GetString("LibraryId") ?? Guid.NewGuid().ToString();
+            session.SetString("LibraryId", libraryId);
+            LibraryToRead library = _library.GetLibrary(libraryId);
+
+            User user = _users.GetCurentUser(_provider);
+
+            ViewBag.User = user;
+            ViewBag.Title = user.Name;
+            var books = library.Books;
             return View(books);
         }
 
         public RedirectToActionResult AddToLibrary(int id)
         {
-            _library.AddBook(_books.GetBook(id));
+            ISession session = _provider.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+
+            string libraryId = session.GetString("LibraryId") ?? Guid.NewGuid().ToString();
+            session.SetString("LibraryId", libraryId);
+
+            _library.AddBook(libraryId, _books.GetBook(id));
 
             return RedirectToAction("BooksList");
         }

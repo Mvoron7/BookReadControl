@@ -14,7 +14,8 @@ namespace BookReadControl.Data
 
         public DbSet<Book> Books { get; set; }
         public DbSet<BookType> Types { get; set; }
-        public DbSet<LibraryToRead> Libraries { get; set; }
         public DbSet<User> Users { get; set; }
+
+        public DbSet<LibraryToRead> Libraries { get; set; }
     }
 }

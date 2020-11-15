@@ -17,9 +17,30 @@ namespace BookReadControl.Data.Repository
             this.appDBContent = appDBContent;
         }
 
+        public void AddBook(string id, Book book)
+        {
+            LibraryToRead library = appDBContent.Libraries.FirstOrDefault(l => l.Guid.Equals(id));
+
+            if (library == null)
+            {
+                library = new LibraryToRead() { Guid = id };
+                appDBContent.Libraries.Add(library);
+            }
+            library.AddBook(book);
+            appDBContent.SaveChanges();
+        }
+
         public LibraryToRead GetLibrary(string id)
         {
-            return appDBContent.Libraries.FirstOrDefault(l => l.Guid.Equals(id));
+            LibraryToRead library = appDBContent.Libraries.FirstOrDefault(l => l.Guid.Equals(id));
+
+            if (library == null)
+            {
+                library = new LibraryToRead() { Guid = id };
+                appDBContent.Libraries.Add(library);
+                appDBContent.SaveChanges();
+            }
+            return library;
         }
     }
 }

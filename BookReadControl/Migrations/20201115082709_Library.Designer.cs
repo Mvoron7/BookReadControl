@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookReadControl.Migrations
 {
     [DbContext(typeof(AppDBContent))]
-    [Migration("20201115005423_Library")]
+    [Migration("20201115082709_Library")]
     partial class Library
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,9 +24,7 @@ namespace BookReadControl.Migrations
             modelBuilder.Entity("BookReadControl.Data.Models.Book", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<int>("BookTypeId")
                         .HasColumnType("int");
@@ -68,9 +66,7 @@ namespace BookReadControl.Migrations
             modelBuilder.Entity("BookReadControl.Data.Models.BookType", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");

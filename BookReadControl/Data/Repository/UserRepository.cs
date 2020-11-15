@@ -24,7 +24,7 @@ namespace BookReadControl.Data.Repository
             ISession session = provider.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
 
             //Если пользователь не зарегистрирован "создаем нового"
-            int userId = session.GetInt32(Constants.UserId) ?? 0;
+            int userId = session.GetInt32(Constants.UserId) ?? 1;
             return GetUser(userId);
         }
 
