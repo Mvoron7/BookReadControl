@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using BookReadControl.Data;
 using BookReadControl.Data.Interfaces;
 using BookReadControl.Data.mocks;
-using BookReadControl.Data.Models;
+using BookReadControl.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -17,7 +17,6 @@ namespace BookReadControl
 {
     public class Startup
     {
-
         private readonly IConfigurationRoot _dbConfiguration;
 
         public Startup(IWebHostEnvironment host)
@@ -28,17 +27,19 @@ namespace BookReadControl
                  .Build();
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            //Пример подключения БД. Неиспользуется
-            //services.AddDbContext<AppDBContent>(options => options.UseSqlServer(_dbConfiguration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AppDBContent>(options => options.UseSqlServer(_dbConfiguration.GetConnectionString("DefaultConnection")));
 
-            services.AddTransient<IBooks, MockBooks>();
-            services.AddTransient<IBooksTypes, MockType>();
-            services.AddSingleton<IUser, MockUser>();
-            services.AddSingleton<ILibrary, MockLibrary>();
+            //services.AddTransient<IBooks, MockBooks>();
+            //services.AddTransient<IBooksTypes, MockType>();
+            //services.AddSingleton<IUser, MockUser>();
+            //services.AddSingleton<ILibrary, MockLibrary>();
+            services.AddTransient<IBooks, BookRepository>();
+            services.AddTransient<IBooksTypes, TypeRepository>();
+            services.AddTransient<IUser, UserRepository>();
+            services.AddTransient<ILibrary, LibraryRepository>();
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
@@ -46,7 +47,6 @@ namespace BookReadControl
             services.AddSession();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseDeveloperExceptionPage();
@@ -58,6 +58,11 @@ namespace BookReadControl
             {
                 routes.MapRoute(name: "TypeFilter", template: "Books/{action}/{typeName?}", defaults: new { Controller = "Books", action = "BooksList" });
             });
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                UpdateDataBase.Update(scope.ServiceProvider.GetRequiredService<AppDBContent>());
+            }
         }
     }
 

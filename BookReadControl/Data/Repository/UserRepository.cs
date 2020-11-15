@@ -1,22 +1,22 @@
 ﻿using BookReadControl.Data.Interfaces;
 using BookReadControl.Data.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookReadControl.Data.mocks
+namespace BookReadControl.Data.Repository
 {
-    public class MockUser : IUser
+    public class UserRepository : IUser
     {
-        //Таблица в БД
-        private IEnumerable<User> Users => Constants.Users;
+        private readonly AppDBContent appDBContent;
 
-        public User GetUser(int id)
+        public UserRepository(AppDBContent appDBContent)
         {
-            return Users.Where(u => u.Id == id).FirstOrDefault();
+            this.appDBContent = appDBContent;
         }
 
         public User GetCurentUser(IServiceProvider provider)
@@ -26,6 +26,11 @@ namespace BookReadControl.Data.mocks
             //Если пользователь не зарегистрирован "создаем нового"
             int userId = session.GetInt32(Constants.UserId) ?? 0;
             return GetUser(userId);
+        }
+
+        public User GetUser(int id)
+        {
+            return appDBContent.Users.FirstOrDefault(u => u.Id == id);
         }
     }
 }

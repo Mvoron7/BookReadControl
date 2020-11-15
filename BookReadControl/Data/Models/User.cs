@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,22 +9,14 @@ namespace BookReadControl.Data.Models
 {
     public class User
     {
-        public int Id { get; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id { get; set; }
 
-        public string Name { get; }
+        public string Name { get; set; }
 
-        private bool Admin { get; }
+        public bool Admin { get; set; }
 
-        public bool IsAdmin { get => Admin; }
-
-        public string Avatar { get; }
-
-        public User(int userId, string name, bool admin, string avatar)
-        {
-            Id = userId;
-            Name = name;
-            Admin = admin;
-            Avatar = avatar;
-        }
+        public string Avatar { get; set; }
     }
 }

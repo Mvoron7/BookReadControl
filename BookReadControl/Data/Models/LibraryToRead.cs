@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,7 +27,9 @@ namespace BookReadControl.Data.Models
             }
         }
 
-        public readonly string Id;
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public string Guid { get; set; }
 
         private List<Book> _books;
 

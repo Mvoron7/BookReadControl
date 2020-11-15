@@ -7,12 +7,30 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201114230233_Library.cs" />
+    <Compile Remove="Migrations\20201114230233_Library.Designer.cs" />
+    <Compile Remove="Migrations\20201114230444_Library.cs" />
+    <Compile Remove="Migrations\20201114230444_Library.Designer.cs" />
+    <Compile Remove="Migrations\20201114230643_Library.cs" />
+    <Compile Remove="Migrations\20201114230643_Library.Designer.cs" />
+    <Compile Remove="Migrations\20201114232214_Library.cs" />
+    <Compile Remove="Migrations\20201114232214_Library.Designer.cs" />
+    <Compile Remove="Migrations\20201115002510_Library.cs" />
+    <Compile Remove="Migrations\20201115002510_Library.Designer.cs" />
+    <Compile Remove="Migrations\20201115002943_Library.cs" />
+    <Compile Remove="Migrations\20201115002943_Library.Designer.cs" />
+    <Compile Remove="Migrations\20201115003642_Library.cs" />
+    <Compile Remove="Migrations\20201115003642_Library.Designer.cs" />
+    <Compile Remove="Migrations\20201115003807_Library.cs" />
+    <Compile Remove="Migrations\20201115003807_Library.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
       <PrivateAssets>all</PrivateAssets>
